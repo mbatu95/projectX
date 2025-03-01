@@ -1,6 +1,9 @@
 import { initThreeJS } from './three'; // Adjust the path as necessary
 
-// Function to handle file upload
+// Initialize the Three.js scene
+initThreeJS();
+
+// Function to handle file upload (remains unchanged)
 const handleFileUpload = (event: Event) => {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -12,21 +15,10 @@ const handleFileUpload = (event: Event) => {
             const contents = e.target?.result;
             if (typeof contents === 'string') {
                 try {
-                    // Parse JSON data
-                    const jsonData = JSON.parse(contents);
-                    console.log('JSON Data:', jsonData);
-
-                    // Display the parsed JSON data
-                    const outputElement = document.getElementById('output');
-                    if (outputElement) {
-                        // Format and display JSON
-                        outputElement.textContent = JSON.stringify(jsonData, null, 2);
-                    }
-
-                    // Initialize Three.js with the parsed JSON data
-                    initThreeJS(jsonData);
+                    // Here you can parse the JSON data if needed in the future
+                    console.log('File contents:', contents);
                 } catch (error) {
-                    console.error('Error parsing JSON:', error);
+                    console.error('Error parsing file:', error);
                 }
             }
         };

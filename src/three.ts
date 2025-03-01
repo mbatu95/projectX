@@ -1,64 +1,61 @@
-// threejs-setup.ts
-import * as THREE from "three";
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 // Function to initialize Three.js scene
-const initThreeJS = (patternData: any) => {
-  // Create scene
-  const scene = new THREE.Scene();
+const initThreeJS = () => {
+    // Create scene
+    const scene = new THREE.Scene();
 
-  // Create camera
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = 5;
+    // Create camera
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 5, 10); // Set initial camera position
 
-  // Create renderer
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas: document.getElementById("canvas") as HTMLCanvasElement,
-  });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  // Also, update the camera aspect ratio whenever the window is resized
-  window.addEventListener("resize", () => {
+    // Create renderer
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas') as HTMLCanvasElement });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-  });
+    renderer.setPixelRatio(window.devicePixelRatio); // Improve rendering quality
 
-  // Create a geometry based on the patternData
-  const geometry = new THREE.BufferGeometry();
-  const vertices = new Float32Array(
-    patternData
-      .map((point: { x: number; y: number }) => [point.x, point.y, 0])
-      .flat()
-  );
-  geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    // Set the clear color of the renderer to light gray (hex color)
+    renderer.setClearColor(0xF02C2C, 1);  // Set background color to light gray (between gray and white)
 
-  // Create a material for the line
-  const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+    // Create a cube
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-  // Create a line based on geometry and material
-  const line = new THREE.Line(geometry, lineMaterial);
-  scene.add(line);
+    // Create axes helper (size of axes: 5 units)
+    const axesHelper = new THREE.AxesHelper(5);
+    scene.add(axesHelper);
 
-  // Create a cube
-  const cubeGeometry = new THREE.BoxGeometry(1, 1, 1); // Create a cube geometry
-  const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff }); // Create a blue material
-  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial); // Create a mesh from geometry and material
-  cube.position.x = 2; // Position the cube
-  scene.add(cube); // Add the cube to the scene
+    // Create grid helper (size: 10, divisions: 10)
+    const gridHelper = new THREE.GridHelper(10, 10);
+    scene.add(gridHelper);
 
-  // Render loop
-  const animate = () => {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-  };
+    // Initialize OrbitControls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0, 0); // Set target to the origin (0, 0, 0)
+    controls.update(); // Update controls to reflect the new target
 
-  animate();
+    // Render loop
+    const animate = () => {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01; // Rotate cube
+        cube.rotation.y += 0.01;
+        controls.update(); // Update controls
+        renderer.render(scene, camera);
+    };
+
+    animate();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    });
 };
 
 // Export the initThreeJS function

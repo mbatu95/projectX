@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three.js and JSON Viewer</title>
-    <link rel="stylesheet" href="/src/styles/style.css"> <!-- Link your CSS file -->
+    <title>Three.js Scene</title>
+    <style>
+        /* Basic CSS to remove margins and ensure canvas takes full size */
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide scrollbar */
+        }
+        canvas {
+            display: block; /* Remove the default inline-block spacing */
+        }
+    </style>
 </head>
 <body>
-    <div id="container">
-        <div id="three-container">
-            <canvas id="canvas"></canvas>
-        </div>
-        <div id="json-container">
-            <h2>JSON Data</h2>
-            <pre id="output"></pre> <!-- Display JSON here -->
-        </div>
-    </div>
-    <input type="file" id="fileInput" />
-    <button id="uploadButton">Upload JSON</button>
-    <script src="/dist/visualise.bundle.js"></script> <!-- Adjust the path as necessary -->
+    <canvas id="canvas"></canvas>
+    <script src="/dist/visualise.bundle.js"></script> <!-- Your bundled JavaScript file -->
 </body>
 </html>
