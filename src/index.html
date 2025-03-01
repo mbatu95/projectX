@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Murat Batuhan Gunaydin</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <style>
+      /* Styling the button */
+      .fancy-button {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 18px;
+        color: white;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .fancy-button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Hell</h1>
+    </header>
+
+    <main>
+      <p>Murat Batuhan Gunaydin.</p>
+
+      <!-- Resim burada gösteriliyor -->
+      <div class="flame-container">
+        <div class="flame-effect"></div>
+        <img
+          src="assets/images/germanysado.png"
+          alt="My Image"
+          class="flame-image"
+        />
+      </div>
+      <p>
+        <a href="aboutus/aboutus.html" class="hakkimizda">Hakkimizda</a>
+      </p>
+
+      <p>
+        <a href="Games/game2/cube.html" class="cube">Kup Oyunu</a>
+      </p>
+
+      <p>
+        <a href="Games/game3/game3.html" class="game3">kiyafetimiz</a>
+      </p>
+
+      <!-- Rastgele Sayı Sonucu -->
+      <p id="result"></p>
+
+      <!-- About Us Sayfasına Bağlantı -->
+      <p><a href="about.html">Learn more about us</a></p>
+      <p>
+        <a href="Games/GermanySadoGame/sado.html" class="plane">GermanySado Oyunu</a>
+      </p>
+      <p>
+        <a href="signup/signup.html" class="plane">Kaydol</a>
+      </p>
+    </main>
+
+    <footer>
+      <p>© 2024 Mehmet Onal Adam midir?</p>
+    </footer>
+
+    <!-- JavaScript kodunuzu burada ekleyin -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const flameContainer = document.querySelector(".flame-container");
+
+        flameContainer.addEventListener("click", function () {
+          this.classList.toggle("move-right");
+        });
+      });
+    </script>
+  </body>
+</html>
