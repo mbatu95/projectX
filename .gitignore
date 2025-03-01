@@ -1,0 +1,15 @@
+# ESLint cache
+.eslintcache
+
+# Node modules (this is generally added if you haven’t already)
+node_modules/
+
+.DS_Store
+
+
+dist/
+
+
+# Optional: Ignore specific ESLint configuration files if you don’t want them in version control
+# .eslintrc.json
+# .eslintignore
